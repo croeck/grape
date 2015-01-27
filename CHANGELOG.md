@@ -11,6 +11,8 @@
 * [#952](https://github.com/intridea/grape/pull/952): Status method now raises error when called with invalid status code - [@dabrorius](https://github.com/dabrorius).
 * [#957](https://github.com/intridea/grape/pull/957): Regexp validator now supports `allow_blank`, `nil` value behavior changed - [@calfzhou](https://giihub.com/calfzhou).
 * [#962](https://github.com/intridea/grape/pull/962): The `default` attribute with `false` value is documented now - [@ajvondrak](https://github.com/ajvondrak).
+* [#](https://github.com/intridea/grape/pull/): Improve support for the usage of grape-entity objects to describe route params - [@croeck](https://github.com/croeck).
+* [#](https://github.com/intridea/grape/pull/): Use more detailed :required information to pass to grape-swagger - [@croeck](https://github.com/croeck).
 
 #### Fixes
 

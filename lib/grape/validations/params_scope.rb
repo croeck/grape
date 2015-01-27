@@ -104,7 +104,13 @@ module Grape
       end
 
       def validates(attrs, validations)
-        doc_attrs = { required: validations.keys.include?(:presence) }
+        doc_attrs = {}
+
+        # remove all information that are no validator
+        %w(is_array required).each do |invalid_validator_name|
+          # do not remove if there is a validator matching the documentation name
+          validations.delete(invalid_validator_name.to_sym) unless Validations.validators[invalid_validator_name.to_s]
+        end
 
         # special case (type = coerce)
         validations[:coerce] = validations.delete(:type) if validations.key?(:type)
@@ -118,6 +124,15 @@ module Grape
 
         default = validations[:default]
         doc_attrs[:default] = default if validations.key?(:default)
+
+        if validations.keys.include?(:presence)
+          # use presence as first indicator
+          doc_attrs[:required] = true
+        else
+          # otherwise use the intended behaviour
+          required = validations.delete(:required)
+          doc_attrs[:required] = required ? required : false
+        end
 
         values = validations[:values]
         doc_attrs[:values] = values if values
